@@ -1,9 +1,9 @@
 :root {
-  --background: #FBFBFB;
-  --card-bg: #E8F9FF;
-  --primary: #C4D9FF;
-  --accent: #C5BAFF;
-  --text: #222;
+  --background: #fef6f5;
+  --card-bg: #ffe3f1;
+  --primary: #f59fc1;
+  --accent: #e4b4d5;
+  --text: #2b2b2b;
 }
 
 body {
@@ -12,6 +12,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 input,
@@ -35,7 +36,7 @@ button {
   background-color: var(--primary);
   border: none;
   padding: 0.75rem;
-  color: white;
+  color: var(--text);
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
