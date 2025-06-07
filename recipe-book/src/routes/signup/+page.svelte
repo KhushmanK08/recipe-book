@@ -9,8 +9,31 @@
   let username = "";
   let message = "";
 
+  // Password must be at least 8 chars, include 1 letter and 1 number
+  const passwordIsValid = (pw) => {
+    return pw.length >= 8 && /[a-zA-Z]/.test(pw) && /\d/.test(pw);
+  };
+
   const handleSignup = async () => {
     message = "";
+
+    if (!passwordIsValid(password)) {
+      message =
+        "Password must be at least 8 characters and include a letter and a number.";
+      return;
+    }
+
+    // Check for unique username
+    const { data: existingUser, error: userCheckError } = await supabase
+      .from("users")
+      .select("id")
+      .eq("username", username)
+      .single();
+
+    if (existingUser) {
+      message = "Username already taken. Please choose another.";
+      return;
+    }
 
     const { data, error } = await supabase.auth.signUp(
       { email, password },
@@ -29,7 +52,7 @@
         id: user.id,
         full_name,
         username,
-        email, // insert email explicitly
+        email,
       },
     ]);
 
