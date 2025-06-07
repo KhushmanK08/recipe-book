@@ -1,10 +1,14 @@
 :root {
-  --background: #fef6f5;
-  --card-bg: #ffe3f1;
-  --primary: #f59fc1;
-  --accent: #e4b4d5;
-  --text: #2b2b2b;
+  --background: #F3E9DC;
+  /* latte beige */
+  --primary: #C3B091;
+  /* light mocha */
+  --accent: #8E806A;
+  /* espresso brown */
+  --text: #2E2E2E;
+  /* rich black */
 }
+
 
 body {
   background-color: var(--background);

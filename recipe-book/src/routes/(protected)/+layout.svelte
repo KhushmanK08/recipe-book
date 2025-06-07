@@ -13,9 +13,6 @@
 
 <script>
   import { user } from "$lib/stores";
-  import NavBar from "../../components/Navbar.svelte";
 </script>
-
-<NavBar />
 
 <slot />

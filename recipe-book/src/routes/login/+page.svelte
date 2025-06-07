@@ -39,17 +39,24 @@
 </form>
 
 <style>
+  :global(body) {
+    background-color: #f3e9dc;
+    color: #2e2e2e;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
   .form {
     max-width: 400px;
     margin: 10vh auto;
-    background: white;
+    background: #c3b091; /* light mocha */
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 0 20px #fcb6d4;
+    box-shadow: 0 4px 15px rgba(142, 128, 106, 0.5);
     display: flex;
     flex-direction: column;
     gap: 1rem;
     animation: float 4s ease-in-out infinite;
+    color: #2e2e2e;
   }
 
   input,
@@ -57,37 +64,46 @@
     padding: 1rem;
     font-size: 1rem;
     border-radius: 0.75rem;
-    border: 2px solid #ffd6e3;
+    border: 2px solid #8e806a; /* espresso brown */
     outline: none;
+    background: #f3e9dc; /* latte beige */
+    color: #2e2e2e;
+    transition: border-color 0.3s ease;
+  }
+
+  input:focus {
+    border-color: #c3b091; /* light mocha */
   }
 
   button {
-    background: #ff80ab;
-    color: white;
+    background: #8e806a; /* espresso brown */
+    color: #f3e9dc; /* latte beige */
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: background 0.3s ease;
+    border: none;
   }
 
   button:hover {
-    background: #ff4081;
+    background: #c3b091; /* light mocha */
+    color: #2e2e2e;
   }
 
   .link {
     font-size: 0.9rem;
     text-align: center;
-    color: #444;
+    color: #2e2e2e;
     cursor: pointer;
     transition: color 0.3s ease;
   }
 
   .link:hover {
-    color: #ff4081;
+    color: #8e806a; /* espresso brown */
     text-decoration: underline;
   }
 
   .error {
-    color: red;
+    color: #b34040;
     font-size: 0.9rem;
     text-align: center;
   }
