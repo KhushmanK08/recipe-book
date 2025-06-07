@@ -13,7 +13,7 @@
 
 <script>
   import { user } from "$lib/stores";
-  import NavBar from "$lib/components/NavBar.svelte";
+  import NavBar from "../../components/Navbar.svelte";
 </script>
 
 <NavBar />
