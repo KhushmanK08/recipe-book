@@ -52,14 +52,6 @@ src/
 ├── app.html       # Root HTML template
 ```
 
-## ✅ To-Do
-
-- [ ] Add image upload for recipes  
-- [ ] Add recipe categories and tags  
-- [ ] Search and filter functionality  
-- [ ] Responsive dark mode toggle  
-- [ ] Pagination or infinite scroll for recipe lists
-
 ## 🧠 Credits
 
 - Built with ❤️ by [Khushman Kapoor](https://github.com/your-username)  
