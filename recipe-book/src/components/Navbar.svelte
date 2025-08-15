@@ -32,7 +32,9 @@
 </script>
 
 <nav>
-  <div class="left">🍳 Recipe Book</div>
+  <div class="left">
+    <a href="/dashboard" class="brand-link">🍳 Recipe Book</a>
+  </div>
 
   {#if currentUser}
     <div class="right">
@@ -59,8 +61,15 @@
     z-index: 100;
   }
 
-  .left {
+  .left .brand-link {
     font-size: 1.5rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .left .brand-link:hover {
+    color: var(--accent);
   }
 
   .right {

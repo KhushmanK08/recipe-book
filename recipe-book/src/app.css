@@ -7,21 +7,39 @@
   /* espresso brown */
   --text: #2E2E2E;
   /* rich black */
+  --card-bg: #fff8f0;
+  /* light card background for forms/modals */
 }
 
-
+/* Import Google Fonts */
 body {
+  font-family: 'Roboto', sans-serif;
+  /* body text */
   background-color: var(--background);
   color: var(--text);
-  font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  line-height: 1.5;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  /* headings */
+  color: var(--accent);
+  margin: 0 0 0.5rem 0;
+}
+
+button,
 input,
-button {
+textarea {
   font-family: inherit;
+  /* inherit from body or parent */
 }
 
 form {
@@ -40,13 +58,79 @@ button {
   background-color: var(--primary);
   border: none;
   padding: 0.75rem;
-  color: var(--text);
+  color: var(--background);
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Search inputs */
+input[type="text"] {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  width: 250px;
+}
+
+/* Recipe cards */
+.recipe-item,
+.recipe-card {
+  background: var(--primary);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-item:hover,
+.recipe-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-image img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.recipe-info h3 {
+  margin: 0;
+  color: var(--accent);
+}
+
+.recipe-info p {
+  margin: 0.25rem 0 0;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+/* Center search section for results page */
+.results-container .search-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Back button */
+.back-btn {
+  background: var(--primary);
+  color: var(--background);
+}
+
+.back-btn:hover {
+  background: var(--accent);
+  color: var(--background);
 }

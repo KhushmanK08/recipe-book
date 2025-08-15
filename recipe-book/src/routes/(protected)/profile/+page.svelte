@@ -78,6 +78,18 @@
   };
 </script>
 
+<button class="back-btn" on:click={() => goto("/dashboard")}>
+  ⬅ Back to Dashboard
+</button>
+
+{#if loading}
+  <p>Loading profile...</p>
+{:else if error}
+  <p class="error">{error}</p>
+{:else}
+  ...
+{/if}
+
 {#if loading}
   <p>Loading profile...</p>
 {:else if error}
@@ -219,6 +231,26 @@
     text-align: center;
   }
 
+  .back-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--accent);
+    color: var(--background);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+  }
+
+  .back-btn:hover {
+    background: var(--primary);
+    color: var(--text);
+  }
+
   @media (max-width: 600px) {
     .profile-container {
       padding: 1rem;
@@ -227,6 +259,15 @@
     .profile-info,
     .recipes-section {
       padding: 1rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .back-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+      top: 0.5rem;
+      left: 0.5rem;
     }
   }
 </style>
