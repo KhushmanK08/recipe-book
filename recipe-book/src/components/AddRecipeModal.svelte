@@ -5,7 +5,6 @@
   const dispatch = createEventDispatcher();
 
   let title = "";
-  let description = "";
   let ingredients = "";
   let instructions = "";
   let image_url = "";
@@ -24,7 +23,6 @@
   ];
   const maxFileSize = 5 * 1024 * 1024; // 5 MB
 
-  // Handle file input with validation
   function handleFileChange(event) {
     error = "";
     const file = event.target.files[0];
@@ -46,13 +44,11 @@
 
     imageFile = file;
 
-    // Preview
     const reader = new FileReader();
     reader.onload = () => (imagePreview = reader.result);
     reader.readAsDataURL(file);
   }
 
-  // Upload to Supabase Storage
   async function uploadImage(file) {
     const fileExt = file.name.split(".").pop();
     const fileName = `${Date.now()}.${fileExt}`;
@@ -99,7 +95,6 @@
       const { error: insertError } = await supabase.from("recipes").insert({
         user_id: user.id,
         title,
-        description,
         ingredients: ingredients
           .split(",")
           .map((i) => i.trim())
@@ -115,7 +110,6 @@
 
       success = "Recipe added successfully!";
       title = "";
-      description = "";
       ingredients = "";
       instructions = "";
       image_url = "";
@@ -128,7 +122,6 @@
     }
   }
 
-  // Preview reactive for URL input
   $: imagePreview = imageFile ? imagePreview : image_url ? image_url : "";
 </script>
 
@@ -142,9 +135,6 @@
 
   <label>Title</label>
   <input type="text" bind:value={title} placeholder="Recipe title" />
-
-  <label>Description</label>
-  <textarea bind:value={description} placeholder="Short description"></textarea>
 
   <label>Ingredients (comma separated)</label>
   <input

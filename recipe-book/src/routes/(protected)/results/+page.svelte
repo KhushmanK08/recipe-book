@@ -1,7 +1,6 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { page } from "$app/stores";
-  import { onDestroy } from "svelte";
   import { goto } from "$app/navigation";
   import ViewRecipeModal from "../../../components/ViewRecipeModal.svelte";
   import Navbar from "../../../components/Navbar.svelte";
@@ -11,7 +10,6 @@
   let selectedRecipe = null;
   let newSearch = "";
 
-  // Fetch recipes from API
   async function fetchRecipes(q) {
     if (!q) return;
     try {
@@ -19,12 +17,16 @@
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${q}`,
       );
       const data = await res.json();
+
       results =
         data.meals?.map((meal) => ({
           id: meal.idMeal,
           title: meal.strMeal,
-          description: meal.strInstructions?.substring(0, 120) + "...",
           image_url: meal.strMealThumb,
+          ingredients: Object.keys(meal)
+            .filter((k) => k.startsWith("strIngredient") && meal[k])
+            .map((k) => meal[k])
+            .filter((i) => i),
         })) || [];
     } catch (e) {
       console.error(e);
@@ -33,11 +35,9 @@
   }
 
   onMount(() => {
-    // Initialize query from URL
     query = new URLSearchParams(window.location.search).get("q") || "";
     fetchRecipes(query);
 
-    // Subscribe to $page to detect query changes via pushState
     const unsubscribe = page.subscribe(($page) => {
       const q = $page.url.searchParams.get("q") || "";
       if (q !== query) {
@@ -51,8 +51,6 @@
 
   function handleSearch() {
     if (!newSearch.trim()) return;
-
-    // Update URL and fetch recipes
     window.history.pushState(
       {},
       "",
@@ -91,7 +89,10 @@
           </div>
           <div class="recipe-info">
             <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
+            <p>
+              <strong>Ingredients:</strong>
+              {recipe.ingredients.length} items
+            </p>
           </div>
         </div>
       {/each}
@@ -107,7 +108,6 @@
 </div>
 
 <style>
-  /* Use Poppins font globally (already linked in app.html) */
   body,
   input,
   button {

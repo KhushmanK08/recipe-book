@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import { supabase } from "$lib/supabaseClient";
 
-  export let recipe = null; // Pass recipe object: {id, title, description, ingredients, instructions, image_url}
+  export let recipe = null; // {id, title, ingredients, instructions, image_url}
   const dispatch = createEventDispatcher();
 
   let saving = false;
@@ -23,9 +23,10 @@
     }
 
     try {
-      const { error } = await supabase
-        .from("favorites")
-        .upsert({ user_id: user.id, recipe_id: recipe.id });
+      const { error } = await supabase.from("favorites").insert({
+        user_id: user.id,
+        external_recipe_id: recipe.id,
+      });
 
       if (error) throw error;
       message = "Recipe saved successfully!";
@@ -46,25 +47,13 @@
     <img src={recipe.image_url} alt={recipe.title} />
   {/if}
 
-  <p><strong>Description:</strong> {recipe.description}</p>
-
   {#if recipe.ingredients?.length}
-    <p><strong>Ingredients:</strong></p>
-    <ul>
-      {#each recipe.ingredients as ing}
-        <li>{ing}</li>
-      {/each}
-    </ul>
+    <p><strong>Ingredients:</strong> {recipe.ingredients.join(", ")}</p>
   {/if}
 
-  {#if recipe.instructions?.length}
-    <p><strong>Instructions:</strong></p>
-    <ol>
-      {#each recipe.instructions as step}
-        <li>{step}</li>
-      {/each}
-    </ol>
-  {/if}
+  <p style="font-style: italic; margin-top: 0.5rem;">
+    Save to view instructions
+  </p>
 
   {#if message}
     <p class="message">{message}</p>
